@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Countries from './components/Countries/Countries';
+import Header from './components/Header/Header';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CountryDetails from './components/CountryDetails/CountryDetails';
+import NotFound from './components/NotFound/NotFound';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <Router>
+            <Header />
+            <Switch>
+                <Route exact path="/">
+                    <Countries />
+                </Route>
+                <Route path="/home">
+                    <Countries />
+                </Route>
+                <Route exact path="/country/:countryName">
+                    <CountryDetails />
+                </Route>
+                <Route path="*">
+                    <NotFound />
+                </Route>
+            </Switch>
+        </Router>
+    );
+};
 
 export default App;
